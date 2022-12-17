@@ -1,0 +1,23 @@
+.sign-up-page {
+  background-color: #607ca9;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #173057;
+    min-height: 500px;
+    width: 600px;
+    border-radius: 50px;
+    padding: 40px;
+  }
+
+  &__form-header {
+    color: white;
+    align-self: center;
+  }
+}
