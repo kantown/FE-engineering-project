@@ -22,7 +22,6 @@ export const LoginPage = () => {
       navigate("/");
     }
   };
-  console.log("HOME");
 
   return (
     <div className="login-page">

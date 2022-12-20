@@ -7,22 +7,24 @@ interface ConfigProviderProps {
 }
 
 export const ConfigProvider = ({ children }: ConfigProviderProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { setUser } = useUserStore();
+  const [isLoading, setIsLoading] = useState(true);
+  const { setUser, resetStore } = useUserStore();
   useEffect(() => {
     const fetchData = async () => {
       const { username, email }: User = await getUserData();
       if (username && email) {
+        console.log("POMOCY", username, email);
         setUser({ username, email });
+        setIsLoading(false);
+      } else {
+        resetStore();
+        setIsLoading(false);
       }
     };
-    setIsLoading(true);
     fetchData();
-    setIsLoading(false);
-  }, [setUser]);
+  }, [resetStore, setUser]);
   if (isLoading) {
     return <>Loading</>;
-  } else {
-    return <>{children}</>;
   }
+  return <>{children}</>;
 };

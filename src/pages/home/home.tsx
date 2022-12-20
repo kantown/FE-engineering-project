@@ -6,7 +6,7 @@ import "./home.scss";
 export function HomePage() {
   const { user, resetStore } = useUserStore();
   const navigate = useNavigate();
-
+  console.log(user);
   useEffect(() => {
     if (!user.username) {
       console.log("HomePage: ", user.username, user.email);
