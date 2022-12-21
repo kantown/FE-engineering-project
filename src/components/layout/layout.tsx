@@ -3,7 +3,7 @@ import { Menu } from "components/menu";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "store/userStore";
-import './layout.scss'
+import "./layout.scss";
 
 export const Layout = () => {
   const { user, resetStore } = useUserStore();
