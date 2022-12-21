@@ -1,0 +1,12 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__link {
+    padding: 30px 20px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: white;
+  }
+}

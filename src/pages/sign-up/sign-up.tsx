@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
-import { Button } from "../../components/form/button";
-import { CustomFrom } from "../../components/form/custom-form";
-import { Input } from "../../components/form/input";
+import { Button } from "components/form/button";
+import { CustomFrom } from "components/form/custom-form";
+import { Input } from "components/form/input";
 import "./sign-up.scss";
 
 export const SignUp = () => {
@@ -21,8 +21,9 @@ export const SignUp = () => {
       method: "POST",
       body,
     });
-    const data = await res.json();
-    console.log(data);
+    if (res) {
+      console.log("Account created");
+    }
   };
 
   return (

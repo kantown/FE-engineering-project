@@ -1,10 +1,10 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/form/button";
-import { CustomFrom } from "../../components/form/custom-form";
-import { Input } from "../../components/form/input";
-import { getUserData, login } from "../../services/user-service";
-import { useUserStore } from "../../store/userStore";
+import { Button } from "components/form/button";
+import { CustomFrom } from "components/form/custom-form";
+import { Input } from "components/form/input";
+import { getUserData, login } from "services/user-service";
+import { useUserStore } from "store/userStore";
 import "./login.scss";
 
 export const LoginPage = () => {
@@ -33,6 +33,7 @@ export const LoginPage = () => {
             name="login"
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
+            autoComplete="username"
           />
           <Input
             type="password"
