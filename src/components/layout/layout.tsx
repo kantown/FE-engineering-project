@@ -3,6 +3,7 @@ import { Menu } from "components/menu";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "store/userStore";
+import './layout.scss'
 
 export const Layout = () => {
   const { user, resetStore } = useUserStore();
@@ -16,13 +17,13 @@ export const Layout = () => {
   }, [resetStore, user, navigate]);
 
   return (
-    <div className="home-page">
-      <div className="home-page__menu">
+    <div className="layout">
+      <div className="layout__menu">
         <Menu />
       </div>
-      <main className="home-page__main">
-        <div className="home-page__header"></div>
-        <div className="home-page__content">
+      <main className="layout__main">
+        <div className="layout__header"></div>
+        <div className="layout__content">
           <AppRouter />
         </div>
       </main>
