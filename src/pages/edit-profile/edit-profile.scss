@@ -1,0 +1,16 @@
+.edit-profile {
+  background-color: #b4c9eb;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  padding: 40px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+
+  &__form-header {
+    align-self: center;
+  }
+}

@@ -1,3 +1,4 @@
+import { PersonFilledIcon } from "assets/person-filled-icon";
 import { AppRouter } from "components/app-router";
 import { Menu } from "components/menu";
 import { useEffect } from "react";
@@ -8,7 +9,6 @@ import "./layout.scss";
 export const Layout = () => {
   const { user, resetStore } = useUserStore();
   const navigate = useNavigate();
-  console.log("Layout", user);
   useEffect(() => {
     if (!user.username) {
       resetStore();
@@ -16,13 +16,28 @@ export const Layout = () => {
     }
   }, [resetStore, user, navigate]);
 
+  const logout = () => {
+    resetStore();
+    navigate("/login");
+  };
+
   return (
     <div className="layout">
       <div className="layout__menu">
+        <PersonFilledIcon className="layout__icon" />
+        <span className="layout__user">@{user.username}</span>
         <Menu />
       </div>
       <main className="layout__main">
-        <div className="layout__header"></div>
+        <div className="layout__header">
+          <button
+            type="button"
+            className="layout__logout-button"
+            onClick={() => logout()}
+          >
+            Logout
+          </button>
+        </div>
         <div className="layout__content">
           <AppRouter />
         </div>

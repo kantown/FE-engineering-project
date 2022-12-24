@@ -28,3 +28,21 @@ export const login = async ({
     throw Error("Caught error during logging in");
   }
 };
+
+export const updateUser = async ({
+  username,
+  email,
+}: {
+  username: string;
+  email: string;
+}) => {
+  try {
+    const response = await axios.post("/users/updateUser/", {
+      username,
+      email,
+    });
+    return response.data;
+  } catch (err) {
+    throw Error("Caught error during updating user");
+  }
+};
