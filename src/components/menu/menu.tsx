@@ -20,7 +20,7 @@ export const Menu = () => {
   return (
     <div className="menu">
       {navigationRoutes.map(({ label, path }) => (
-        <Link className="menu__link" to={path}>
+        <Link className="menu__link" key={label} to={path}>
           {label}
         </Link>
       ))}
