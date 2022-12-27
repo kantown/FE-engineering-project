@@ -26,7 +26,7 @@ export const EditProfile = () => {
 
   return (
     <div className="edit-profile">
-      <CustomFrom onSubmit={submitForm} submitButton={<Button text="Submit" />}>
+      <CustomFrom onSubmit={submitForm} submitButton={<Button text="Save" />}>
         <h1 className="edit-profile__form-header">Edit profile</h1>
         <Input
           type="text"
