@@ -1,6 +1,8 @@
+import { AdminPage } from "pages/admin";
 import { EditProfile } from "pages/edit-profile";
 import { HomePage } from "pages/home";
-import { Profile } from "pages/profile";
+import { ProfilePage } from "pages/profile";
+import { SubsPage } from "pages/subs";
 import { Route, Routes } from "react-router-dom";
 import { PATHS } from "utils/constants";
 
@@ -11,15 +13,19 @@ const ROUTES = [
   },
   {
     path: PATHS.PROFILE,
-    element: <Profile />,
+    element: <ProfilePage />,
   },
   {
     path: PATHS.SUBSCRIPTIONS,
-    element: <HomePage />,
+    element: <SubsPage />,
   },
   {
     path: PATHS.EDIT_PROFILE,
     element: <EditProfile />,
+  },
+  {
+    path: PATHS.ADMIN,
+    element: <AdminPage />,
   },
 ];
 

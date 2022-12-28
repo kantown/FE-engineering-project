@@ -15,13 +15,15 @@ export const EditProfile = () => {
   const navigate = useNavigate();
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();
-    const updatedUser = await updateUser({ username, email }) as User;
-    if (updatedUser) {
-      setUser({ ...updatedUser });
-      navigate(PATHS.PROFILE);
-      return;
+    if (user.username !== username || user.email !== email) {
+      const updatedUser = (await updateUser({ username, email })) as User;
+      if (updatedUser) {
+        setUser({ ...updatedUser });
+        navigate(PATHS.PROFILE);
+        return;
+      }
+      console.error("Update error");
     }
-    console.error("Update error");
   };
 
   return (

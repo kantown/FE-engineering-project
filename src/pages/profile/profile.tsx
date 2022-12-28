@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "store/userStore";
 import "./profile.scss";
 
-export const Profile = () => {
+export const ProfilePage = () => {
   const { user } = useUserStore();
   const navigate = useNavigate();
   return (

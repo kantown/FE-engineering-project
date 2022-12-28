@@ -3,4 +3,5 @@ export enum PATHS {
   SUBSCRIPTIONS = "/subscriptions",
   PROFILE = "/profile",
   EDIT_PROFILE = "/edit-profile",
+  ADMIN = "/admin",
 }

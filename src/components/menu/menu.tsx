@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useUserStore } from "store/userStore";
 import { PATHS } from "utils/constants";
 import "./menu.scss";
 export const Menu = () => {
@@ -16,7 +17,7 @@ export const Menu = () => {
       path: PATHS.SUBSCRIPTIONS,
     },
   ];
-
+  const { user } = useUserStore();
   return (
     <div className="menu">
       {navigationRoutes.map(({ label, path }) => (
@@ -24,6 +25,11 @@ export const Menu = () => {
           {label}
         </Link>
       ))}
+      {user.isAdmin && (
+        <Link className="menu__link" to={PATHS.ADMIN}>
+          Admin
+        </Link>
+      )}
     </div>
   );
 };
