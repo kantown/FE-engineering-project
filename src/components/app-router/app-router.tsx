@@ -1,3 +1,4 @@
+import { AddSub } from "pages/add-sub";
 import { AdminPage } from "pages/admin";
 import { EditProfile } from "pages/edit-profile";
 import { HomePage } from "pages/home";
@@ -26,6 +27,10 @@ const ROUTES = [
   {
     path: PATHS.ADMIN,
     element: <AdminPage />,
+  },
+  {
+    path: PATHS.ADD_SUBSCRIPTION,
+    element: <AddSub />,
   },
 ];
 
