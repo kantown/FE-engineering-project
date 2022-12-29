@@ -34,12 +34,15 @@ export const SignUp = () => {
           <Input
             type="text"
             name="login"
+            minLength={3}
+            maxLength={15}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
-          />
+            />
           <Input
             type="password"
             name="password"
+            minLength={6}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             autoComplete="new-password"

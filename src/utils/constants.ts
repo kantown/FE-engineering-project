@@ -15,3 +15,11 @@ export enum SUB_PERIOD {
   SIX_MONTHS = "sixMonths",
   YEAR = "year",
 }
+
+export interface Subscription {
+  name: string;
+  plan: {
+    price: number;
+    period: SUB_PERIOD;
+  }[];
+}

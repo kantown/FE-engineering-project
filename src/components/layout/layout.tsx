@@ -25,7 +25,7 @@ export const Layout = () => {
     <div className="layout">
       <div className="layout__menu">
         <PersonFilledIcon className="layout__icon" />
-        <span className="layout__user">@{user.username}</span>
+        <span className="layout__user">{user.username}</span>
         <Menu />
       </div>
       <main className="layout__main">
