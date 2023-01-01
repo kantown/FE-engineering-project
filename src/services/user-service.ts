@@ -1,4 +1,5 @@
 import axios from "utils/axios";
+import { SUB_PERIOD } from "utils/constants";
 
 export const getUserData = async () => {
   const response = await axios.get("/users/getUser");
@@ -45,4 +46,21 @@ export const updateUser = async ({
   } catch (err) {
     throw Error("Caught error during updating user");
   }
+};
+
+export const addSubToUser = async ({
+  name,
+  period,
+  price,
+  date,
+}: {
+  name: string;
+  period: SUB_PERIOD;
+  price: number;
+  date: string;
+}) => {
+  const res = await axios.post("/users/addSub/", {
+    sub: { name, period, price, lastPayment: new Date(date) },
+  });
+  return res.data;
 };

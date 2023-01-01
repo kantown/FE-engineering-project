@@ -1,5 +1,8 @@
 import { CreatePeriodLabel } from "helpers/create-period-label";
+import getDateFromIso from "helpers/get-date-from-iso";
 import { FormEvent, useState } from "react";
+import { addSubToUser } from "services/user-service";
+import { useUserStore } from "store/userStore";
 import { SUB_PERIOD } from "utils/constants";
 
 export const CustomSub = () => {
@@ -8,11 +11,17 @@ export const CustomSub = () => {
     price: 1,
     period: SUB_PERIOD.MONTH,
   });
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-
-  const formSubmit = (event: FormEvent) => {
+  const [date, setDate] = useState(getDateFromIso(new Date().toISOString()));
+  const { setUser } = useUserStore();
+  const formSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(name, plan.period, plan.price, date);
+    const { period, price } = plan;
+    if (!name || !period || !price || !date) {
+      console.error("Invalid data");
+      return;
+    }
+    const res = await addSubToUser({ name, period, price, date });
+    setUser({ ...res });
   };
 
   return (
@@ -21,7 +30,7 @@ export const CustomSub = () => {
         type="text"
         value={name}
         minLength={3}
-        maxLength={15}
+        maxLength={20}
         onChange={(e) => setName(e.target.value)}
       />
       <select

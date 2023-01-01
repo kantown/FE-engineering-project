@@ -1,0 +1,71 @@
+.subs {
+  &__search-bar {
+    margin-bottom: 25px;
+  }
+
+  &__search-input {
+    flex-grow: 1;
+    margin-left: 25px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+
+  &__search-button {
+    margin-right: 10px;
+    font-size: 2rem;
+    padding: 0 10px;
+    background: none;
+    border: none;
+    font-weight: 500;
+  }
+
+  &__sub-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 65px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    background-color: #b4c9eb;
+    border: 1px solid #2c5fae;
+    margin-bottom: 2px;
+
+    &:nth-child(2n + 1) {
+      background-color: #95b4e4;
+    }
+  }
+
+  &__sub-name {
+    margin-left: 50px;
+    width: 125px;
+  }
+
+  &__sub-date {
+    width: 100px;
+    text-align: center;
+  }
+
+  &__sub-price {
+    width: 50px;
+    text-align: center;
+  }
+
+  &__sub-period {
+    width: 125px;
+    text-align: center;
+  }
+
+  &__sub-menu {
+    margin-right: 25px;
+    height: 35px;
+    text-align: center;
+    cursor: pointer;
+  }
+}

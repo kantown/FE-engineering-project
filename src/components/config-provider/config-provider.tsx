@@ -11,13 +11,19 @@ export const ConfigProvider = ({ children }: ConfigProviderProps) => {
   const { setUser, resetStore } = useUserStore();
   useEffect(() => {
     const fetchData = async () => {
-      const { username, email, isAdmin }: User = await getUserData();
-      if (username && email) {
-        setUser({ username, email, isAdmin });
+      try {
+        const { username, email, isAdmin,subs }: User = await getUserData();
+        if (username && email) {
+          setUser({ username, email, isAdmin, subs });
+          setIsLoading(false);
+        } else {
+          resetStore();
+          setIsLoading(false);
+        }
+      } catch (err) {
+        console.log(err);
         setIsLoading(false);
-      } else {
         resetStore();
-        setIsLoading(false);
       }
     };
     fetchData();
