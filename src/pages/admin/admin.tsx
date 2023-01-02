@@ -1,7 +1,8 @@
 import { CreatePeriodLabel } from "helpers/create-period-label";
 import { FormEvent, useState } from "react";
+import Select from "react-select";
 import { addSub } from "services/subs-service";
-import { SUB_PERIOD } from "utils/constants";
+import { SELECT_STYLES, SUB_PERIOD } from "utils/constants";
 import "./admin.scss";
 
 export const AdminPage = () => {
@@ -34,49 +35,59 @@ export const AdminPage = () => {
     await addSub({ name, plan: plans });
   };
 
+  const options = Object.values(SUB_PERIOD).map((period) => ({
+    label: CreatePeriodLabel(period),
+    value: period,
+  }));
+
   return (
-    <form onSubmit={formSubmit}>
+    <form className="admin-page" onSubmit={formSubmit}>
       <h1>Add new application</h1>
       <div>
         <input
           type="text"
+          className="admin-page__input"
           name="sub-name"
+          placeholder="Name..."
           value={name}
           minLength={2}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
-      {plans.map(({ price, period }, index) => (
-        <div key={index}>
+      {plans.map(({ price }, index) => (
+        <div className="admin-page__container" key={index}>
           <input
+            className="admin-page__input"
             type="number"
             min={1}
             step={0.01}
             value={price}
             onChange={(e) => onChangePrice({ value: Number(e.target.value), index })}
           />
-          <select
-            value={period}
-            onChange={(e) =>
-              onChangePeriod({ value: e.target.value as SUB_PERIOD, index })
+          <Select
+            styles={{ ...SELECT_STYLES }}
+            options={options}
+            defaultValue={options[0]}
+            placeholder="Select..."
+            classNamePrefix="add-sub__select"
+            onChange={(state) =>
+              onChangePeriod({ value: state?.value as SUB_PERIOD, index })
             }
-          >
-            {Object.values(SUB_PERIOD).map((period) => (
-              <option value={period} key={period}>
-                {CreatePeriodLabel(period)}
-              </option>
-            ))}
-          </select>
+          />
         </div>
       ))}
       {plans.length > 1 && (
-        <button onClick={() => setPlans((prev) => prev.slice(0, prev.length - 1))}>
+        <button
+          className="admin-page__button"
+          onClick={() => setPlans((prev) => prev.slice(0, prev.length - 1))}
+        >
           -
         </button>
       )}
       {plans.length < 5 && (
         <button
           type="button"
+          className="admin-page__button"
           onClick={() =>
             setPlans((prev) => [
               ...prev,
@@ -90,7 +101,9 @@ export const AdminPage = () => {
           Add plan
         </button>
       )}
-      <button type="submit">Submit</button>
+      <button className="admin-page__button" type="submit">
+        Submit
+      </button>
     </form>
   );
 };

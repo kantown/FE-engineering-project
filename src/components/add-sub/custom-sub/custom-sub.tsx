@@ -3,7 +3,10 @@ import getDateFromIso from "helpers/get-date-from-iso";
 import { FormEvent, useState } from "react";
 import { addSubToUser } from "services/user-service";
 import { useUserStore } from "store/userStore";
-import { SUB_PERIOD } from "utils/constants";
+import { SELECT_STYLES, SUB_PERIOD } from "utils/constants";
+import Select from "react-select";
+import { LabelInput } from "components/label-input";
+import "./custom-sub.scss";
 
 export const CustomSub = () => {
   const [name, setName] = useState("");
@@ -24,46 +27,67 @@ export const CustomSub = () => {
     setUser({ ...res });
   };
 
+  const options = Object.values(SUB_PERIOD).map((period) => ({
+    label: CreatePeriodLabel(period),
+    value: period,
+  }));
+
   return (
-    <form onSubmit={formSubmit}>
-      <input
-        type="text"
-        value={name}
-        minLength={3}
-        maxLength={20}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <select
-        value={plan.period}
-        onChange={(e) =>
-          setPlan((prev) => {
-            const copy = { ...prev };
-            copy.period = e.target.value as SUB_PERIOD;
-            return copy;
-          })
-        }
-      >
-        {Object.values(SUB_PERIOD).map((period) => (
-          <option value={period} key={period}>
-            {CreatePeriodLabel(period)}
-          </option>
-        ))}
-      </select>
-      <input
-        type="number"
-        min={1}
-        step={0.01}
-        value={plan.price}
-        onChange={(e) =>
-          setPlan((prev) => {
-            const copy = { ...prev };
-            copy.price = Number(e.target.value);
-            return copy;
-          })
-        }
-      />
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-      <button type="submit">Submit</button>
+    <form onSubmit={formSubmit} className="custom-sub">
+      <LabelInput label="Name">
+        <input
+          className="custom-sub__input"
+          type="text"
+          placeholder="Name..."
+          value={name}
+          minLength={3}
+          maxLength={20}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </LabelInput>
+      <LabelInput label="Period">
+        <Select
+          styles={{ ...SELECT_STYLES }}
+          options={options}
+          defaultValue={options[0]}
+          placeholder="Select..."
+          classNamePrefix="add-sub__select"
+          onChange={(state) =>
+            setPlan((prev) => {
+              const copy = { ...prev };
+              copy.period = !!state ? state.value : SUB_PERIOD.MONTH;
+              return copy;
+            })
+          }
+        />
+      </LabelInput>
+      <LabelInput label="Price">
+        <input
+          className="custom-sub__input"
+          type="number"
+          min={1}
+          step={0.01}
+          value={plan.price}
+          onChange={(e) =>
+            setPlan((prev) => {
+              const copy = { ...prev };
+              copy.price = Number(e.target.value);
+              return copy;
+            })
+          }
+        />
+      </LabelInput>
+      <LabelInput label="Date">
+        <input
+          className="custom-sub__input custom-sub__input--icon"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </LabelInput>
+      <button className="custom-sub__input custom-sub__input--button" type="submit">
+        Submit
+      </button>
     </form>
   );
 };

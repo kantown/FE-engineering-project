@@ -4,6 +4,8 @@ import { DetailedSubscription } from "pages/add-sub";
 import { FormEvent, useState } from "react";
 import { addSubToUser } from "services/user-service";
 import { useUserStore } from "store/userStore";
+import { SELECT_STYLES } from "utils/constants";
+import Select from "react-select";
 import "./sub-details.scss";
 
 export const SubDetails = ({ selectValue }: { selectValue: DetailedSubscription }) => {
@@ -28,21 +30,36 @@ export const SubDetails = ({ selectValue }: { selectValue: DetailedSubscription 
     setUser({ ...res });
   };
 
+  const options = selectValue.plan.map(({ _id, price, period }) => ({
+    label: CreatePeriodPriceLabel(price, period),
+    value: _id,
+  }));
+
   return (
-    <form onSubmit={formSubmit}>
-      <input type="text" value={selectValue.name} disabled />
-      <select
-        value={planSelectValue}
-        onChange={(e) => setPlanSelectValue(e.target.value)}
-      >
-        {selectValue.plan.map(({ _id, price, period }) => (
-          <option value={_id} key={_id}>
-            {CreatePeriodPriceLabel(price, period)}
-          </option>
-        ))}
-      </select>
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-      <button type="submit">Submit</button>
+    <form className="sub-details" onSubmit={formSubmit}>
+      <input
+        className="sub-details__input"
+        type="text"
+        value={selectValue.name}
+        disabled
+      />
+      <Select
+        styles={{ ...SELECT_STYLES }}
+        options={options}
+        defaultValue={options[0]}
+        placeholder="Select..."
+        classNamePrefix="add-sub__select"
+        onChange={(state) => setPlanSelectValue(state?.value || options[0].value)}
+      />
+      <input
+        className="sub-details__input sub-details__input--icon"
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <button className="sub-details__button" type="submit">
+        Submit
+      </button>
     </form>
   );
 };

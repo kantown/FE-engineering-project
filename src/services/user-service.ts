@@ -60,7 +60,7 @@ export const addSubToUser = async ({
   date: string;
 }) => {
   const res = await axios.post("/users/addSub/", {
-    sub: { name, period, price, lastPayment: new Date(date) },
+    sub: { name, period, price, payment: new Date(date) },
   });
   return res.data;
 };

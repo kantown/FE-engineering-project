@@ -1,3 +1,4 @@
+import { SUB_PERIOD } from "utils/constants";
 import create from "zustand";
 
 export interface User {
@@ -7,8 +8,8 @@ export interface User {
   subs?: {
     name: string;
     price: number;
-    period: "week" | "twoWeeks" | "month" | "threeMonths" | "sixMonths" | "year";
-    lastPayment: string;
+    period: SUB_PERIOD;
+    payment: string;
   }[];
 }
 
